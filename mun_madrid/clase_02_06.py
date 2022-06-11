@@ -27,8 +27,8 @@ print(cwd)
 # json.dump(data, file, indent=4)
 # file.close()
 
-with open("data.json" , "r", encoding="utf8") as file:
+with open(f"{cwd}/data.json" , "r", encoding="utf8") as file:
     data = json.load(file)
-    # print(data)
+    print(data)
 
 
