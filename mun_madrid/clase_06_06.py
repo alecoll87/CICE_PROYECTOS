@@ -29,6 +29,14 @@ def max_surface():
     return municipio 
 print(max_surface(), "\n")
 
+print("2.5 Obtener el municipio más grande con una funcion lambda\n")
+
+def get_bigger_than(sup):
+    return filter(lambda mun: mun["superficie_km2"] >= sup, data)
+
+for mun in get_bigger_than(100):
+    print(mun, "\n")
+
 print("3. Obtener superficie total\n")
 
 total_surface = sum([mun["superficie_km2"] for mun in data])
