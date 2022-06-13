@@ -95,3 +95,4 @@ a = (1,2,3,4,5)
 b = ("a", "b", "c", "d", "e")
 
 print(list(map(lambda num1, num2: (num1, num2),a ,b)))
+

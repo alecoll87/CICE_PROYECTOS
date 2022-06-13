@@ -21,21 +21,38 @@ print("2. Obtener el municipio más grande\n")
 
 def max_surface():
     max_num = 0.0
-    municipio = ""
+    municipio = None
     for surface in data:
         if surface["superficie_km2"] > max_num:
             max_num = surface["superficie_km2"]
             municipio = surface
     return municipio 
+
 print(max_surface(), "\n")
 
-print("2.5 Obtener el municipio más grande con una funcion lambda\n")
+print("2.1 Obtener el municipio más grande con una funcion lambda\n")
 
 def get_bigger_than(sup):
     return filter(lambda mun: mun["superficie_km2"] >= sup, data)
 
 for mun in get_bigger_than(100):
     print(mun, "\n")
+
+print("2.2 Hacer un sort de los municipios por superficie cuadrar\n")
+
+
+'''
+definiendo una función:
+
+def get_key(mun):
+    return mun["superficie_km2"]
+
+print(sorted(data, reverse=True, key=get_key) [0:5])
+
+'''
+
+print(sorted(data, reverse=True, key=lambda mun: mun["superficie_km2"])[0:5], "\n")
+
 
 print("3. Obtener superficie total\n")
 
