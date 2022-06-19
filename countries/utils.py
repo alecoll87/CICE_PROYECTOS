@@ -1,16 +1,19 @@
 import sys
 import requests as req
 import os
+import random as rd
 
 CWD = os.getcwd()
 
 url ="https://restcountries.com/v3.1"
 
+
 def menu():
     print("Welcome")
     print("1. Search country")
     print("2. Download flag")
-    print("3. Play country")
+    print("3. Remove flag")
+    print("4. Play country")
     print("q. exit")
     
 def pretty_print(country):
@@ -20,14 +23,17 @@ def pretty_print(country):
 def get_country(country_name: str) -> tuple:
     keys = ("capital", "population", "area", "languages")
     result = {k:None for k in keys}
-    res = req.get(f"{url}/name/{country_name}").json()
-    if len(res) >= 1:
-        country = res[0]
+    res = req.get(f"{url}/name/{country_name}?fullText=True")
+    country = res if res.status_code == 200 else req.get(f"{url}/name/{country_name}")
+    country = country.json() if res.status_code == 200 else False
+    if country:
+        country = country[0]
         result["capital"] = country["capital"][0]
         result["population"] = country["population"]
         result["area"] = country["area"]
         result["languages"] = tuple(country["languages"].values())
         return (result, tuple(country["flags"].values())[0])
+    return False
 
 
 def download_flag(url: str) -> bool:
@@ -40,6 +46,34 @@ def download_flag(url: str) -> bool:
         return True
     return False
 
+questions = [
+    {
+        "q": "*@*'s Capital",
+        "key": "capital"
+    },
+    {
+        "q": "*@*'s Population",
+        "key": "capital"
+    },
+    {
+        "q": "*@*'s Surface",
+        "key": "capital"
+    }
 
+]
+
+region = req.get(f"{url}/region/americas").json()
+rd.shuffle(region)
+
+for q in questions:
+    i = rd.randint(0, len(region))
+    country = region[i]
+    q["q"] = q["q"].replace("*@*", region[i]["name"]["common"])
+    q["a"] = country[q["key"]]
+    print(q["q"])
+    if type(q["a"]) == list:
+        print(q["a"][0])
+    else:
+        print(q["a"])
 
 
