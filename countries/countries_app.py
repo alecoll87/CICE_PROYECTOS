@@ -43,4 +43,8 @@ while user != "q":
         os.remove(f"{CWD}/flags/{flags[user-1]}")
         
         system ("clear")
-   
+
+    elif user == "4":
+        system ("clear")
+        menu_continent()
+        continent = input("option: ")

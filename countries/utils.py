@@ -13,7 +13,7 @@ def menu():
     print("1. Search country")
     print("2. Download flag")
     print("3. Remove flag")
-    print("4. Play country")
+    print("4. Play Game")
     print("q. exit")
     
 def pretty_print(country):
@@ -46,6 +46,23 @@ def download_flag(url: str) -> bool:
         return True
     return False
 
+
+
+def menu_continent():
+    print("1. American continent")
+    print("2. African continent")
+    print("3. Asian continent")
+    print("4. European Continent")
+    print("5. Continent of Oceania")
+    print("q. exit")
+
+
+
+region = req.get(f"{url}/region/americas").json()
+rd.shuffle(region)
+
+
+
 questions = [
     {
         "q": "*@*'s Capital",
@@ -61,9 +78,6 @@ questions = [
     }
 
 ]
-
-region = req.get(f"{url}/region/americas").json()
-rd.shuffle(region)
 
 for q in questions:
     i = rd.randint(0, len(region))
