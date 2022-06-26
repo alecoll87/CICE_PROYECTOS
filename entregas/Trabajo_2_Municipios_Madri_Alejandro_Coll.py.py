@@ -41,16 +41,6 @@ for mun in get_bigger_than(100):
 print("2.2 Hacer un sort de los municipios por superficie cuadrada\n")
 
 
-'''
-definiendo una función:
-
-def get_key(mun):
-    return mun["superficie_km2"]
-
-print(sorted(data, reverse=True, key=get_key) [0:5])
-
-'''
-
 print(sorted(data, reverse=True, key=lambda mun: mun["superficie_km2"])[0:5], "\n")
 
 
@@ -85,17 +75,12 @@ print(population()/len(data), "\n")
 print("7.Comprobar la ley de Benford\n")
 
 Benford = {"1":0, "2":0, "3":0, "4":0, "5":0, "6":0, "7":0, "8":0, "9":0}
-# COMPREHENSION LIST Benford = {k:v for k in range(1,10)}
-# como quiero que v sea 0 y mi k str entonces: Benford = {str(k): 0 for k in range(1,10)}
 
 for mun in data:
    first_digit = str(mun["densidad_por_km2"]) 
    Benford[first_digit[0]] += 100/len(data)
 
 print(Benford)
-
-# plt.plot(range(1,10), Benford.values())
-# plt.show()
 
 fig, ax=plt.subplots()
 ax.bar(range(1,10), Benford.values(), width=1, edgecolor="white", linewidth=0.7)

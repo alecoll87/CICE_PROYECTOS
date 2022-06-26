@@ -48,4 +48,3 @@ while user != "q":
         system ("clear")
         menu_continent()
         continent = input("option: ")
-        system ("clear")
