@@ -38,6 +38,9 @@ def write(file_path, data):
 def get_by_name(name, users):
     return next(filter(lambda user: user["name"] == name, users), False)
 
+def get_by_key(key, value, users):
+    return next(filter(lambda user: user[key] == value, users), False)
+
 def create_user(name, pwd):
     users = read(file_path)
     is_user = get_by_name(name, users["data"])

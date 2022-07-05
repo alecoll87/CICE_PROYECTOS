@@ -2,6 +2,7 @@ import sys
 import requests as req
 import os
 import random as rd
+import auth
 
 CWD = os.getcwd()
 
@@ -35,7 +36,7 @@ def get_country(country_name: str) -> tuple:
         return (result, tuple(country["flags"].values())[0])
     return False
 
-
+@auth.accesslog
 def download_flag(url: str) -> bool:
     flag_name = url[-6:]
     flag_img = req.get(url)

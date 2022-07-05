@@ -1,50 +1,67 @@
-import json
+
 from os import *
 from utils import *
+from auth_obj import Auth
 
-system("clear")
-user = ""
-while user != "q":
-    menu()
-    user = input ("option: ")
-    system("clear")
-    menu()
-    if user == "1":
-        country_name = input("Country: ")
+test = Auth(f"{os.getcwd()}/users.json")
+
+def main(user):
+    while user != "q":
+        menu()
+        user = input ("option: ")
         system("clear")
         menu()
-        country, flag = get_country(country_name)
-        if country:
-            pretty_print(country)
-        else:
-            print("Not found")
-        input(": ")
-        system ("clear")
+        if user == "1":
+            country_name = input("Country: ")
+            system("clear")
+            menu()
+            country, flag = get_country(country_name)
+            if country:
+                pretty_print(country)
+            else:
+                print("Not found")
+            input(": ")
+            system ("clear")
 
-    elif user == "2":
-        system ("clear")
-        # country_name = input("Country: ")
-        country, flag = get_country(country_name)
-        is_flag = input("Download flag?(Y/N): ").lower()
-        if is_flag == "y":
-            if download_flag(flag):
-                print("Download successful")
-                input("...")
-        system ("clear")
+        elif user == "2":
+            system ("clear")
+            # country_name = input("Country: ")
+            country, flag = get_country(country_name)
+            is_flag = input("Download flag?(Y/N): ").lower()
+            if is_flag == "y":
+                if download_flag(flag):
+                    print("Download successful")
+                    input("...")
+            system ("clear")
 
 
-    elif user == "3":
-        system ("clear")
-        flags = os.listdir(f"{CWD}/flags")
-        for i, flag in enumerate(flags):
-            print(f"{i+1}. {flag}")
-        
-        user = int(input("Do you want to erase any glags?(indicate number): "))
-        os.remove(f"{CWD}/flags/{flags[user-1]}")
-        
-        system ("clear")
+        elif user == "3":
+            system ("clear")
+            flags = os.listdir(f"{CWD}/flags")
+            for i, flag in enumerate(flags):
+                print(f"{i+1}. {flag}")
+            
+            user = int(input("Do you want to erase any glags?(indicate number): "))
+            os.remove(f"{CWD}/flags/{flags[user-1]}")
+            
+            system ("clear")
 
-    elif user == "4":
-        system ("clear")
-        menu_continent()
-        continent = input("option: ")
+        elif user == "4":
+            system ("clear")
+            menu_continent()
+            continent = input("option: ")
+    return user
+
+user = ""
+
+while user != "q":
+    print("1. Login")
+    user = input(": ")
+    if user == "1":
+        print("Login: ")
+        user_name = input("User: ")
+        user_pwd = input("PWD: ")
+        if test.is_authenticated(user_name, user_pwd):
+            main (user)
+
+            
